@@ -39,6 +39,8 @@ RUN uv pip install --system \
     https://github.com/ultralytics/assets/releases/download/v0.0.0/torch-2.5.0a0+872d972e41.nv24.08-cp310-cp310-linux_aarch64.whl \
     https://github.com/ultralytics/assets/releases/download/v0.0.0/torchvision-0.20.0a0+afc54f7-cp310-cp310-linux_aarch64.whl
 RUN uv pip install --system -e ".[export]"
+# Remove opencv-python to use nvidia's default opencv with gstreamer support
+RUN uv pip uninstall --system opencv-python
 
 # Remove extra build files
 RUN rm -rf *.whl /root/.config/Ultralytics/persistent_cache.json
